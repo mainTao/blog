@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/prefixfree.js"></script>
+    <script src="../js/iframeResizer.contentWindow.js"></script>
+    <style>
+        body{
+            height: 680px;
+            margin: 0;
+        }
+        button{
+            padding: 10px;
+            position: absolute;
+        }
+        button#btn-transform-toggle{
+            top: 360px;
+        }
+        button#btn-centralize-toggle{
+            top: 400px;
+        }
+        .dice-6{
+            margin: auto;
+            margin-top: 40px;
+            width: 100px;
+            height: 100px;
+            /*position: relative;*/
+            /*top: 40px;*/
+            transform-style: preserve-3d;
+            perspective: 500px;
+            transition: 1s ease-out;
+            perspective-origin: 180px 180px;
+        }
+
+        .face{
+            position: absolute;
+            /*top: 0px;*/
+            /*left: 0px;*/
+            font-size: 24px;
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            line-height: 100px;
+            /*background-color: rgba(255,0,0,0.4);*/
+            /*border: 1px solid gray;*/
+            color: white;
+            transition: 1s;
+            opacity: 0.5;
+            /*backface-visibility: hidden;*/
+        }
+
+        .up {
+            top: 0;
+            background: rgba(102, 51,255,1);
+        }
+        .bottom {
+            top: 500px;
+            background: rgba(255,153, 0,1);
+        }
+        .right {
+            top: 100px;
+            background: rgba(255, 0, 0,1);
+        }
+        .left {
+            top: 400px;
+            background: rgba( 51,255, 0,1);
+        }
+        .back {
+            top: 200px;
+            background: rgba(255,50,160,1);
+        }
+        .front {
+            top: 300px;
+            background: rgba( 0,153,255,1);
+        }
+
+        .face.centralize{
+            top: 300px;
+        }
+
+        .up.transform{
+            /*transform: rotateX(90deg) translateZ(50px);*/
+            transform: translateY(-50px) rotateX(90deg);
+        }
+        .bottom.transform{
+            transform: rotateX(-90deg) translateZ(50px);
+        }
+        .right.transform{
+            transform: rotateY(90deg) translateZ(50px);
+        }
+        .left.transform{
+            transform: rotateY(-90deg) translateZ(50px);
+        }
+        .back.transform{
+            transform: translateZ(-50px);
+        }
+        .front.transform{
+            transform: translateZ(50px);
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="dice-6">
+    <div class="face up">上</div>
+    <div class="face right">右</div>
+    <div class="face back">后</div>
+    <div class="face front">前</div>
+    <div class="face left">左</div>
+    <div class="face bottom">下</div>
+</div>
+
+<button id="btn-transform-toggle">旋转+平移</button>
+<button id="btn-centralize-toggle">重叠</button>
+
+</body>
+
+<script>
+    $(function(){
+
+        var $faces = $(document).find('.face');
+//        $faces.on('click', function(){
+//            $(this).toggleClass('transform');
+//        });
+
+        $(document).on('click', '#btn-centralize-toggle', function(){
+            $faces.toggleClass('centralize');
+            if($faces.hasClass('centralize')){
+                $(this).text('散开')
+            }
+            else{
+                $(this).text('重叠')
+            }
+        });
+        $(document).on('click', '#btn-transform-toggle', function(){
+            $faces.toggleClass('transform');
+            if($faces.hasClass('transform')){
+                $(this).text('还原')
+            }
+            else{
+                $(this).text('旋转+平移')
+            }
+        });
+    });
+</script>
+</html>

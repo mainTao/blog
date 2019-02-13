@@ -1,0 +1,120 @@
+body {
+  font-family: Helvetica, Tahoma, Arial, "Microsoft YaHei", "微软雅黑", SimSun, "宋体", STXihei, "华文细黑", Heiti, "黑体", sans-serif;
+  font-size: 1em;
+  padding: 0;
+  margin: 0;
+}
+body a {
+  text-decoration: none;
+  color: #4183c4;
+}
+body a:hover {
+  text-decoration: underline;
+}
+body a[title="站长统计"] {
+  display: none;
+}
+img {
+  max-width: 100%;
+}
+h1,
+h2,
+h3,
+h4 {
+  margin-top: 40px;
+  margin-bottom: 10px;
+}
+h1 {
+  margin-top: 60px;
+  font-size: 28px;
+}
+h2 {
+  font-size: 21px;
+  border-bottom: 1px solid #eee;
+  margin-top: 50px;
+  padding-bottom: 4px;
+}
+h3 {
+  font-size: 19px;
+}
+h4 {
+  font-size: 16px;
+}
+.post {
+  max-width: 640px;
+  padding: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px !important;
+  margin-bottom: 50px !important;
+}
+.post li {
+  line-height: 26px;
+  margin-bottom: 14px;
+}
+blockquote {
+  border-left: 4px solid #ddd;
+  padding: 0 15px;
+  margin: 30px 10px;
+  color: #777;
+}
+blockquote > :first-child {
+  margin-top: 0;
+}
+blockquote > :last-child {
+  margin-bottom: 0;
+}
+.post p {
+  margin: 25px 0;
+  line-height: 1.8;
+}
+.post h1:first-child {
+  margin-bottom: 60px !important;
+  margin-top: 0 !important;
+}
+img.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+img.lazy {
+  min-height: 120px;
+}
+video {
+  max-width: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  background: #000;
+}
+a {
+  text-decoration: none;
+}
+.post-bottom {
+  text-align: center;
+  color: #888;
+  font-weight: lighter;
+  margin-bottom: 36px;
+  margin-top: 60px;
+}
+split {
+  text-align: center;
+  display: block;
+  width: 100%;
+  color: #999;
+  border-bottom: solid #999 1px;
+  margin: 30px 0;
+}
+.date {
+  color: #aaa;
+  position: relative;
+  top: -42px;
+  font-size: 14px;
+  font-family: Consolas, "Courier New", Courier, Monaco, Menlo, monospace;
+}
+table {
+  width: 100%;
+}
+thead {
+  background: #d3d3d3;
+}

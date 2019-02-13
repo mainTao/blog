@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="闷道">
+<meta name="keywords" content="闷道,maintao">
+
+    <title>科学上网，我用 shadowsocks</title>
+    <!--<link rel="stylesheet" href="/css/github-md.css">-->
+    <link rel="stylesheet" href="/css/post.css">
+    <link rel="stylesheet" href="/css/maybe-code-highlight.css">
+</head>
+<body>
+<article class="post">
+    <h1 class="title">科学上网，我用 shadowsocks</h1>
+    <div class="date">
+        2015-05-21
+    </div>
+    <div style="text-align:center;color:#999"><br><img src="/img/2015/use-shadowsocks_da-huo-qiang.jpg" alt=""><br>图片来自万智牌<br></div>
+
+<p>自由地访问互联网，相比于在大火墙的保护下访问互联网，有以下优势：</p>
+<ol>
+<li>谷歌的搜索结果比百度好得多</li>
+<li>能看 YouTube 以及其他被墙网站的视频</li>
+<li>能用 Instagram, Facebook, Twitter</li>
+<li>使用 Dropbox，Google Drive 等被墙的网盘</li>
+<li>能够下载托管在 AWS S3 和 SourceForge 的安装包</li>
+<li>当一个网页打不开或者排版有问题，翻下墙多半能解决</li>
+<li>当一个文件下载慢到受不了，翻下墙多半能解决</li>
+</ol>
+<p>市面上有一些 VPN 服务商可以帮我们翻墙，但本文要讲的是自己动手。为什么要自己动手呢？俗话讲「授人以鱼不如授人以渔」，屁话！能直接吃鱼干嘛不直接吃！你咋不自己接雨水净化钻木取火烧开了喝呢？哦对了你还得先有个锅，好吧……</p>
+<p>感谢 VPN 服务商做出的努力，不过这些公共的 VPN 服务经常用着用着突然就不好用了，为什么呢？因为一旦有很多人在用，就容易受到有关部门关注，封域名封IP，请喝茶查水表。</p>
+<p>我不是爱折腾的人，自己动手的真实原因是不得已。为什么自己搭 shadowsocks 靠谱？</p>
+<ul>
+<li>技术上，大火墙对 shadowsocks 目前仍毫无办法</li>
+<li>哪怕你在墙外的服务器真被封了 IP，换个新的就是了，云主机便宜得很</li>
+<li>因为规模小，专门为你出动城管不值得，维稳也是要有预算的</li>
+</ul>
+<h1 id="服务端安装"><a href="#服务端安装" class="headerlink" title="服务端安装"></a>服务端安装</h1><p>Ubuntu 16 已经能用 apt 来安装 shadowsocks 了，可喜可贺。</p>
+<pre><code>$ sudo apt install shadowsocks
+</code></pre><p>其他版本的 Linux 上这样安装：</p>
+<pre><code>$ pip install shadowsocks
+</code></pre><p>以上两种方法安装的都是 Python 版本，不喜欢折腾的用它就好，装好后会以服务的形式运行，启停都很方便。</p>
+<p>除了 Python 之外也有其他语言实现的版本，其中有个占用资源超小的 <a href="https://github.com/shadowsocks/shadowsocks-libev" target="_blank" rel="external">C 语言版本</a>值得推荐，只是安装起来稍麻烦。</p>
+<p>这里要注意，<a href="https://github.com/shadowsocks/shadowsocks-libev#install-from-repository" target="_blank" rel="external">官网上的安装方法</a>不适用于墙内的服务器，下面分别来讲。</p>
+<p>墙外的服务器可以直接进行二进制安装，Ubuntu 14 及以上方法如下：</p>
+<pre><code>$ sudo vi /etc/apt/sources.list
+</code></pre><p>把下面这行添加进文件</p>
+<pre><code>deb http://shadowsocks.org/ubuntu trusty main
+</code></pre><p>保存后执行以下命令：</p>
+<pre><code>$ wget -O- http://shadowsocks.org/debian/1D27208A.gpg | sudo apt-key add -
+$ sudo apt-get update
+$ sudo apt-get install shadowsocks-libev
+</code></pre><p>墙内的服务器则只好从 GitHub 下载源码，编译安装。所以要有 Git，如果已经安装了 Git 跳过这一步：</p>
+<pre><code>$ sudo apt-get update
+$ sudo apt-get install git
+</code></pre><p>克隆下来源码，编译安装：</p>
+<pre><code>$ git clone https://github.com/shadowsocks/shadowsocks-libev.git
+$ cd shadowsocks-libev
+$ sudo apt-get install build-essential autoconf libtool libssl-dev
+$ sudo ./configure
+$ sudo make install
+</code></pre><h1 id="服务端配置和运行"><a href="#服务端配置和运行" class="headerlink" title="服务端配置和运行"></a>服务端配置和运行</h1><p>安装好之后，就可以执行 ss-local 和 ss-server 这两个命令了，它们分别表示客户端和服务端。注意，有个很蛋疼的地方：Python 版的命令叫做 ssserver 和 sslocal，而 C 语言版是 ss-local 和 ss-server。</p>
+<p>下面这张图很清晰地解释了其运作原理。</p>
+<p><img src="/img/2015/use-shadowsocks_explain.png" alt=""></p>
+<p>ss-local 是个潜伏在墙内的奸细，给墙外的 ss-server 通风报信，于是我们的信息就能穿越大火墙了。</p>
+<p>shadowsocks 有个默认的配置文件：</p>
+<pre><code>$ sudo vi /etc/shadowsocks/config.json
+</code></pre><p>后台服务会用这个默认配置文件。如果你用的 Ubuntu 系统，起停服务的命令很简单。</p>
+<p>Python 版本：</p>
+<pre><code>$ sudo service shadowsocks start/shop/restart/status
+</code></pre><p>C 语言版本：</p>
+<pre><code>$ sudo service shadowsocks-libev start/shop/restart/status
+</code></pre><p>下面来看看配置文件。默认的配置文件为了同时兼顾客户端与服务端，把两者的配置项堆在一起，反倒让人摸不着头脑。下面是我精简完以后的服务端配置文件：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    "<span class="attribute">server_port</span>":<span class="value"><span class="number">1984</span></span>,</span><br><span class="line">    "<span class="attribute">password</span>":<span class="value"><span class="string">"xxxxx"</span></span>,</span><br><span class="line">    "<span class="attribute">method</span>":<span class="value"><span class="string">"aes-256-cfb"</span></span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure>
+<p>必须指定的只有端口号、密码、加密方式，这三个必须和客户端的匹配。改完配置文件后，重启服务生效。</p>
+<p>注意，你的服务器端口有可能被防火墙拦截。在 Ubuntu 上开启端口 1984 的命令是：</p>
+<pre><code>$ sudo ufw allow 1984
+</code></pre><p>想详细了解一下 ufw <a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-14-04" target="_blank" rel="external">参考这里</a>。</p>
+<h1 id="Linux-客户端"><a href="#Linux-客户端" class="headerlink" title="Linux 客户端"></a>Linux 客户端</h1><p>安装服务端和客户端是一起的，因此在安装了 shadowsocks 以后客户端和服务端便都有了。</p>
+<p>一般客户端在墙内而服务端在墙外，所以安装要考虑墙的因素，比如 C 语言版就只能用下载源码编译的方法安装。</p>
+<p>启动客户端是命令行的方式，需要明确指定配置文件路径，一般还希望程序默默地运行在后台：</p>
+<pre><code>$ sudo nohup ss-local -c /etc/shadowsocks/config.json &gt;/dev/null 2&gt;/dev/null &amp;
+</code></pre><p>客户端的配置文件是这样子：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    "<span class="attribute">server</span>":<span class="value"><span class="string">"server_ip"</span></span>,</span><br><span class="line">    "<span class="attribute">server_port</span>":<span class="value"><span class="number">1984</span></span>,</span><br><span class="line">    "<span class="attribute">password</span>":<span class="value"><span class="string">"xxxxx"</span></span><br><span class="line">    <span class="string">"method"</span>:<span class="string">"aes-256-cfb"</span></span>,</span><br><span class="line">    "<span class="attribute">local_port</span>":<span class="value"><span class="number">1080</span></span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>客户端需要知道服务器的地址（主机名或IPv4/IPv6地址）、服务器端口号、密码、加密方式，还要指明 socks5 代理跑在客户端本机的哪个端口（例如1080）。</p>
+<p>唉，终于还是触碰到了原理部分，如果只用浏览器翻墙上上网，可以不知道 socks5，但我们现在显然已经走的更远。socks5 是一种代理协议，直接基于 TCP 和 UDP 之上实现，比较底层，所以你用的几乎任何软件都可以走 socks5 代理。Shadowsocks 用一种巧妙的方式实现了 socks5 代理，所以当 ss-local 在墙内开了一个小洞，其实就是开了一个 socks5 代理。要想翻墙则必须指明走这个 socks5 代理。</p>
+<p>但不是你想指定就能指定的。在我们使用的软件里，仅有少数支持设置代理，而这其中能支持 socks5 代理的少之又少，绝大部分软件不会考虑这么偏门的需求，所以就无法直接使用 socks5 代理。</p>
+<p>Linux 平台的 proxychains 可以解决这个问题：</p>
+<pre><code>$ sudo apt install proxychains
+</code></pre><p>proxychains 从配置文件中读要走什么代理，配置文件在哪呢？从 man 手册里了解，proxychains 按照以下顺序查找配置文件：</p>
+<ol>
+<li>./proxychains.conf</li>
+<li>$(HOME)/.proxychains/proxychains.conf</li>
+<li>/etc/proxychains.conf</li>
+</ol>
+<p>一般来说，用 HOME 目录下的作为通用配置文件（规则2），对该用户有效。对于特殊的需要区分对待的，就放在同一目录下（规则1）。而规则3的那个配置文件就作为原始备份留好吧。我们按照规则2要求的来创建配置文件：</p>
+<pre><code>$ mkdir  ~/.proxychains
+$ cp /etc/proxychains.conf ~/.proxychains/proxychains.conf
+$ vi .proxychains/proxychains.conf
+</code></pre><p>在最后一行，把 socks4 注释掉，添加一行 socks5 代理，如下：</p>
+<pre><code>#socks4         127.0.0.1 9050
+socks5  127.0.0.1 1080
+</code></pre><p>保存退出，去下载 facebook 的首页玩玩吧：</p>
+<pre><code>$ proxychains wget www.facebook.com
+</code></pre><p>用法很容易看懂，只要在执行的命令前加上 proxychains 就可以了。至于 proxychains 其他的高级玩法，以后慢慢研究，仅就翻墙来说目前已经够用了。</p>
+<h1 id="Mac-客户端"><a href="#Mac-客户端" class="headerlink" title="Mac 客户端"></a>Mac 客户端</h1><p>Mac 客户端可以选择命令行或者图形界面，作为一个 geek，我当然会选择高大上的图形界面啦哈哈。</p>
+<p>我用图形界面客户端叫做 <a href="http://shadowsocks.org/" target="_blank" rel="external">ShadowsocksX</a>，如果官网的下载地址被墙了，可以到<a href="http://cdn.maintao.com/ShadowsocksX-2.6.3.dmg" target="_blank" rel="external">这里下载</a></p>
+<p>安装配置 ShadowsocksX 就不多说了，网上很多教程，提醒一点就是添加完服务器后一定要在服务器的二级菜单里勾选上，不然不会生效。</p>
+<p>ShadowsocksX 运行起来后，可以设置自动代理或者全局代理，无论选哪个，它都会修改你的系统设置，修改是实时的，在「系统偏好设置/网络/高级」里面可以看到。</p>
+<p>全局代理就是跑在 1080 端口上：<br><img src="/img/2015/use-shadowsocks_proxy-global.png" alt=""></p>
+<p>自动代理模式则使用了代理规则，具体规则可以打开 <a href="http://127.0.0.1:8090/proxy.pac" target="_blank" rel="external">http://127.0.0.1:8090/proxy.pac</a> 下载的 pac 文件来查看：<br><img src="/img/2015/use-shadowsocks_proxy-pac.png" alt=""></p>
+<p>浏览器只要跟随系统的代理就可以了，无需再安装插件。</p>
+<p>浏览器之外的其他软件想翻墙怎么办？比如在命令行里 brew cask install atom 还是被墙，就得想别的办法了，比如使用 <a href="https://www.proxifier.com/" target="_blank" rel="external">Proxifier</a>。</p>
+<p>使用 Proxifier 要先创建代理：<br><img src="/img/2015/use-shadowsocks_proxifier-proxy.png" alt=""></p>
+<p>然后创建规则，也就是什么情况下用什么代理。规则是比较讲究技巧的，但也有个万能法宝，就是当你需要翻墙的时候，把 Default 规则指定为走 socks5 代理，全都走代理，虽然粗暴但是有效。</p>
+<p><img src="/img/2015/use-shadowsocks_proxifier-rules.png" alt=""></p>
+
+</article>
+
+<div class="post-bottom">
+  <!--<a class="rss-feed" href="/atom.xml">RSS 订阅</a>-->
+  <a class="go-home" href="/?ref=more">更多文章</a>
+</div>
+
+
+
+
+<div class="ds-thread" data-thread-key="2015/use-shadowsocks/" data-title="科学上网，我用 shadowsocks" data-url="http://www.maintao.com/2015/use-shadowsocks/"></div>
+
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"maintao"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+
+</body>
+</html>

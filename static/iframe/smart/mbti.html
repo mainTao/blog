@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: Helvetica, Tahoma, Arial, "Microsoft YaHei", "微软雅黑", SimSun, "宋体", STXihei, "华文细黑", Heiti, "黑体", sans-serif;
+      font-size: 1em;
+      padding: 0;
+      margin: 0;
+    }
+    body a {
+      text-decoration: none;
+      color: #4183c4;
+    }
+    body a:hover {
+      text-decoration: underline;
+    }
+    body img[src^="http//eiv.baidu.com/"] {
+      display: none;
+    }
+    img {
+      max-width: 100%;
+      /*display block*/
+      /*margin auto*/
+    }
+    h1,
+    h2,
+    h3,
+    h4 {
+      margin-top: 40px;
+      margin-bottom: 10px;
+    }
+    h1 {
+        margin-top: 60px;
+      font-size: 28px;
+    }
+    h2 {
+      font-size: 20px;
+      border-bottom: 1px solid #ccc;
+      margin-top: 50px;
+    }
+    h3 {
+      font-size: 18px;
+    }
+    h4 {
+      font-size: 16px;
+    }
+    .post {
+      max-width: 640px;
+      padding: 20px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 50px !important;
+      margin-bottom: 50px !important;
+    }
+    blockquote {
+      border-left: 4px solid #ddd;
+      padding: 0 15px;
+      margin: 30px 10px;
+      color: #777;
+    }
+    blockquote > :first-child {
+      margin-top: 0;
+    }
+    blockquote > :last-child {
+      margin-bottom: 0;
+    }
+    .post p {
+      margin: 25px 0;
+      line-height: 1.8;
+    }
+    .post h1:first-child {
+      margin-bottom: 60px !important;
+      margin-top: 0 !important;
+    }
+    img.center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    video {
+      max-width: 100%;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      background: #000;
+    }
+    .gutter pre {
+      margin: 0;
+    }
+    .highlight table {
+      table-layout: fixed;
+    }
+    .highlight table,
+    .highlight tbody,
+    .highlight tr,
+    .highlight .code {
+      display: block;
+      overflow-x: auto;
+      width: 100%;
+    }
+    .code pre {
+      font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
+      font-size: 14px;
+    }
+    .gutter{
+      display: none;
+    }
+    .code pre .line {
+      height: 16px;
+      max-width: 100%;
+    }
+    cmd {
+      font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
+      white-space: pre;
+      display: block;
+      unicode-bidi: embed;
+      background: #474949;
+      color: #d1d9e1;
+      line-height: 2.2em;
+      text-indent: 0.5em;
+    }
+    cmd:before {
+      content: "$";
+    }
+    a {
+      text-decoration: none;
+    }
+    .ds-thread {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .ds-powered-by {
+      display: none;
+    }
+    .post-bottom {
+      position: relative;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      margin-bottom: 20px;
+      max-width: 640px;
+    }
+    .post-bottom .rss-feed {
+      position: absolute;
+      left: 0;
+      color: #fff;
+      background: #ff8c00;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      border-radius: 3px;
+      padding: 3px 12px;
+      font-size: 12px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .post-bottom .rss-feed:hover {
+      background: #ff4500;
+    }
+    split {
+      text-align: center;
+      display: block;
+      width: 100%;
+      color: #999;
+      border-bottom: solid #999 1px;
+      margin: 30px 0;
+    }
+    .date {
+      color: #aaa;
+      position: relative;
+      top: -42px;
+      font-size: 14px;
+      font-family: Consolas, "Courier New", Courier, Monaco, Menlo, monospace;
+    }
+
+  </style>
+  <style>
+    body figure.highlight {
+      background: #474949;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+      margin-top: -15px;
+    }
+    body figure.highlight table {
+      background: #474949;
+    }
+    body figure.highlight .gutter pre {
+      font-family: Consolas, "Source Code Pro", Monaco, Menlo, Consolas, monospace;
+      color: #81a2be;
+      font-size: 14px;
+      line-height: 16px;
+      min-width: 20px;
+    }
+    body figure.highlight .code pre {
+      font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
+      font-size: 14px;
+      line-height: 16px;
+      padding: 0.5em;
+      display: block;
+      color: #d1d9e1;
+      /*font-style italic*/
+    }
+    body figure.highlight .code pre .comment,
+    body figure.highlight .code pre .doctype,
+    body figure.highlight .code pre .javadoc {
+      color: #909090;
+    }
+    body figure.highlight .code pre .keyword,
+    body figure.highlight .code pre .clojure .attribute,
+    body figure.highlight .code pre .winutils,
+    body figure.highlight .code pre .javascript .title,
+    body figure.highlight .code pre .addition,
+    body figure.highlight .code pre .css .tag {
+      color: #c9c;
+    }
+    body figure.highlight .code pre .number {
+      color: #f99157;
+    }
+    body figure.highlight .code pre .command,
+    body figure.highlight .code pre .string,
+    body figure.highlight .code pre .tag .value,
+    body figure.highlight .code pre .regexp,
+    body figure.highlight .code pre .hexcolor {
+      color: #8abeb7;
+    }
+    body figure.highlight .code pre .title,
+    body figure.highlight .code pre .localvars,
+    body figure.highlight .code pre .identifier {
+      color: #b5bd68;
+    }
+    body figure.highlight .code pre .class .keyword {
+      color: #f2777a;
+    }
+    body figure.highlight .code pre .constant,
+    body figure.highlight .code pre .class .title,
+    body figure.highlight .code pre .parent,
+    body figure.highlight .code pre .highlight .id,
+    body figure.highlight .code pre .clojure .title .built_in {
+      color: #fc6;
+    }
+    body figure.highlight .code pre .tag .title,
+    body figure.highlight .code pre .rules .property,
+    body figure.highlight .code pre .clojure .title .built_in {
+      font-weight: bold;
+    }
+    body figure.highlight .code pre .attribute {
+      color: #81a2be;
+    }
+    body figure.highlight .code pre .preprocessor,
+    body figure.highlight .code pre .pragma,
+    body figure.highlight .code pre .pi,
+    body figure.highlight .code pre .shebang,
+    body figure.highlight .code pre .symbol,
+    body figure.highlight .code pre .symbol .string,
+    body figure.highlight .code pre .special,
+    body figure.highlight .code pre .attr_selector,
+    body figure.highlight .code pre .important,
+    body figure.highlight .code pre .subst,
+    body figure.highlight .code pre .cdata {
+      color: #f99157;
+    }
+    body figure.highlight .code pre .deletion {
+      color: #dc322f;
+    }
+    body figure.highlight .code pre .tex .formula {
+      background: #eee8d5;
+    }
+
+  </style>
+</head>
+<body>
+<article class="post">
+    <h1 class="title"></h1>
+    <div class="date">
+        2018-02-26
+    </div>
+    <p><img src="shout-rainbow.jpg" class="center"></p>
+<div style="text-align:center">看不懂这张图？先别着急</div>
+
+
+<h1 id="年轻人的「个人简介」一栏写了什么？"><a href="#年轻人的「个人简介」一栏写了什么？" class="headerlink" title="年轻人的「个人简介」一栏写了什么？"></a>年轻人的「个人简介」一栏写了什么？</h1><p>标签，多个标签</p>
+<p>用几个标签来标注自己，是年轻人中流行的做法（斜杠青年）。我看到过其中一个标签，由四个字母组成，就好奇查了查，原来是 MBTI 的一种性格类型，并由此产生了这个点子。</p>
+<h1 id="简单直白，还蛮准"><a href="#简单直白，还蛮准" class="headerlink" title="简单直白，还蛮准"></a>简单直白，还蛮准</h1><p>四个字母，ESTJ、INFP，够酷够简单。我也测了一下，感觉蛮准的，比星座靠谱多了。星座都有那么多人信，而且成为经久不衰的话题，性格标签没准也能行。</p>
+<h1 id="少年，秀出你的四个字母！"><a href="#少年，秀出你的四个字母！" class="headerlink" title="少年，秀出你的四个字母！"></a>少年，秀出你的四个字母！</h1><p>玩法是这样的：打开一个微信 H5，花一分钟时间选几个 ABC，就能大概判断出你的职业性格类型，然后生成类似下面这么一张图：</p>
+<p><img src="INTJ.jpg" class="center"></p>
+<div style="text-align:center">骄傲地向世界大声宣布：I am INTJ</div>
+
+<p>拽拽的有没有？分享到朋友圈，就能立刻享有更全面的性格测试！得到的分析结果当然也更准确。</p>
+<h1 id="然后呢？"><a href="#然后呢？" class="headerlink" title="然后呢？"></a>然后呢？</h1><p>一张美好的职业蓝图摆在面前，当然会有去实现它的冲动。可究竟从哪开始呢？别担心同学，关注我们的性格测评职业规划公众号，有丰富的知识内容和资深专家帮你出谋划策。做到一定的用户规模后，就可以往智课的业务导流。</p>
+<h1 id="Why-MBTI"><a href="#Why-MBTI" class="headerlink" title="Why MBTI?"></a>Why MBTI?</h1><ul>
+<li>受众广，群众基础好，所以比较容易流行传播</li>
+<li>与职业选择高度相关，容易与我们的留学业务衔接</li>
+</ul>
+<h1 id="执行要点"><a href="#执行要点" class="headerlink" title="执行要点"></a>执行要点</h1><ul>
+<li>题目要轻量：开始做的测试题一定要少，总时长不超过一分钟</li>
+<li>目的是分享：分享图片的画风要亲和年轻人，愿意秀到朋友圈</li>
+</ul>
+<h1 id="让你认为自己很理性的，恰恰是你的感性"><a href="#让你认为自己很理性的，恰恰是你的感性" class="headerlink" title="让你认为自己很理性的，恰恰是你的感性"></a>让你认为自己很理性的，恰恰是你的感性</h1><p>做职业性格分析，看起来非常追求客观和理性，但依然要用感性的视觉冲击才能打动人。</p>
+<p>有几张图，大家感受一下：</p>
+<ul>
+<li><a href="picture-long-post.html">Best Jobs for your Personality</a></li>
+<li><a href="picture-career-path.html">Are you on the right career path?</a></li>
+<li><a href="picture-all-16.html">每种性格的关键字画像</a></li>
+</ul>
+<p>如果你看了这些却并没有被打动，说明它很可能不是一个好点子。那么就尽管说出来，它会帮助我们快速试错、及时止损。</p>
+<p>另外还做了个小 demo，效果如下：</p>
+<iframe style="height: 850px" src="smart.html" frameborder="0" width="100%"></iframe>
+
+<p>也可以<a href="smart.html">点此链接</a>在单独页面查看 demo。</p>
+
+</article>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+{{ if eq .Kind "home" }}
+<!-- 首页样式 -->
+<title>闷道</title>
+<link rel="stylesheet" href="/css/index.css" />
+<script src="/js/shine.js"></script>
+{{ else if eq .Kind "section" }}
+<link rel="stylesheet" href="/css/index.css" />
+<script src="/js/shine.js"></script>
+<title>{{ .Section }}</title>
+{{ end }}
+
+{{ if eq .Params.layout "post" }}
+<!-- 普通 post 样式 -->
+<title>{{.Params.Title}}</title>
+<link rel="stylesheet" href="/css/post.css">
+{{ end }}
+
+{{ if in .Params.style "code" }}
+<!-- 代码高亮样式 -->
+<link rel="stylesheet" href="/css/prism.css">
+<script src="/js/prism.js"></script>
+{{ end }}
+
+<!-- 自定义绝对路径的 CSS -->
+{{ range split .Params.css " " }}
+{{ if ne (trim . " ") "" }}
+<link rel="stylesheet" href="{{ . }}">
+{{ end }}
+{{ end }}
+
+<!-- head 中包含的 JS -->
+{{ range split .Params.js " " }}
+{{ if ne (trim . " ") "" }}
+<script src="/js/{{ . }}.js"></script>
+{{ end }}
+{{ end }}

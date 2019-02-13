@@ -1,0 +1,35 @@
+{{ define "main" }}
+<div class="banner">
+  <div id="maintao-logo" class="shine-text">mainTao</div>
+</div>
+
+<div class="posts-wrapper">
+  <div class="posts">
+
+    {{ $largerYear := 9999 }}
+    {{ range .Pages }}
+    {{ $year := .Date.Year}}
+
+    {{ if eq (sub $largerYear $year) 1 }}
+    <div class="year-split">
+      {{ $largerYear }}
+      <div class="line"></div>
+      {{ $year }}
+    </div>
+    {{ end }}
+    <div>
+      <span class="date">
+        {{ dateFormat "Jan 02" .Date }}
+      </span>
+      <a href="{{.URL}}">{{ .Title }}</a>
+    </div>
+
+    {{ $largerYear = .Date.Year }}
+    {{ end }}
+
+  </div>
+</div>
+{{ $elementId := "maintao-logo"}}
+{{ partial "shine-script.html" (dict "id" "maintao-logo") }}
+
+{{ end }}

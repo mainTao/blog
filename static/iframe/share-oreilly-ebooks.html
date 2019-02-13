@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/post.css">
+  <link rel="stylesheet" href="/css/maybe-code-highlight.css">
+  <script src="../js/prefixfree.js"></script>
+  <script src="../js/iframeResizer.contentWindow.js"></script>
+
+  <style>
+    .oreilly-books {
+      margin-top: 50px;
+      display: -webkit-flex;
+      display: flex;
+      flex-flow: row wrap;
+    }
+
+    .oreilly-books .book {
+      -webkit-flex: 1 0 auto;
+      flex: 1 0 auto;
+      text-align: center;
+      min-width: 180px;
+    }
+
+    .oreilly-books .cover {
+      display: inline-block;
+    }
+
+    .oreilly-books .download {
+      margin: 0 0 1.5rem 0;
+    }
+
+    .oreilly-books .link {
+      margin: 0.7rem;
+      display: inline-block;
+    }
+  </style>
+</head>
+
+<body>
+<div class="oreilly-books">
+  <div class="book">
+    <a class="cover" target="_blank" href="http://shop.oreilly.com/product/0636920033998.do">
+      <img src="https://covers.oreillystatic.com/images/0636920033998/cat.gif"/>
+    </a>
+    <div class="download">
+      <a class="link epub" target="_blank" href="http://cdn.maintao.com/book/CSS_Refactoring.epub">ePub</a>
+      <a class="link pdf" target="_blank" href="http://cdn.maintao.com/book/CSS_Refactoring.pdf">PDF</a>
+    </div>
+  </div>
+  <div class="book">
+    <a class="cover" target="_blank" href="http://shop.oreilly.com/product/0636920053262.do">
+      <img src="https://covers.oreillystatic.com/images/0636920053262/cat.gif"/>
+    </a>
+    <div class="download">
+      <a class="link epub" target="_blank" href="http://cdn.maintao.com/book/Refactoring_JavaScript.epub">ePub</a>
+      <a class="link pdf" target="_blank" href="http://cdn.maintao.com/book/Refactoring_JavaScript.pdf">PDF</a>
+    </div>
+  </div>
+  <div class="book">
+    <a class="cover" target="_blank" href="http://shop.oreilly.com/product/0636920044376.do">
+      <img src="https://covers.oreillystatic.com/images/0636920044376/cat.gif"/>
+    </a>
+    <div class="download">
+      <a class="link epub" target="_blank"
+         href="http://cdn.maintao.com/book/Identity_and_Data_Security_for_Web_Development.epub">ePub</a>
+      <a class="link pdf" target="_blank"
+         href="http://cdn.maintao.com/book/Identity_and_Data_Security_for_Web_Development.pdf">PDF</a>
+    </div>
+  </div>
+  <div class="book">
+    <a class="cover" target="_blank" href="http://shop.oreilly.com/product/0636920046936.do">
+      <img src="https://covers.oreillystatic.com/images/0636920046936/cat.gif"/>
+    </a>
+    <div class="download">
+      <a class="link epub" target="_blank"
+         href="http://cdn.maintao.com/book/Learning_Node_Second_Edition.epub">ePub</a>
+      <a class="link pdf" target="_blank"
+         href="http://cdn.maintao.com/book/Learning_Node_Second_Edition.pdf">PDF</a>
+    </div>
+  </div>
+  <div class="book">
+    <a class="cover" target="_blank" href="http://shop.oreilly.com/product/0636920041641.do">
+      <img src="https://covers.oreillystatic.com/images/0636920041641/cat.gif"/>
+    </a>
+    <div class="download">
+      <a class="link epub" target="_blank"
+         href="http://cdn.maintao.com/book/Padding_Borders_Outlines_and_Margins_in_CSS.epub">ePub</a>
+      <a class="link pdf" target="_blank"
+         href="http://cdn.maintao.com/book/Padding_Borders_Outlines_and_Margins_in_CSS.pdf">PDF</a>
+    </div>
+  </div>
+  <div class="book">
+    <a class="cover" target="_blank" href="http://shop.oreilly.com/product/0636920039426.do">
+      <img src="https://covers.oreillystatic.com/images/0636920039426/cat.gif"/>
+    </a>
+    <div class="download">
+      <a class="link epub" target="_blank" href="http://cdn.maintao.com/book/nginx.epub">ePub</a>
+      <a class="link pdf" target="_blank" href="http://cdn.maintao.com/book/nginx.pdf">PDF</a>
+    </div>
+  </div>
+  <div class="book">
+    <a class="cover" target="_blank" href="http://shop.oreilly.com/product/0636920030485.do">
+      <img src="https://covers.oreillystatic.com/images/0636920030485/cat.gif"/>
+    </a>
+    <div class="download">
+      <a class="link epub" target="_blank" href="http://cdn.maintao.com/book/WebSocket.epub">ePub</a>
+      <a class="link pdf" target="_blank" href="http://cdn.maintao.com/book/WebSocket.pdf">PDF</a>
+    </div>
+  </div>
+  <div class="book">
+    <a class="cover" target="_blank" href="http://shop.oreilly.com/product/0636920041429.do">
+      <img src="https://covers.oreillystatic.com/images/0636920041429/cat.gif"/>
+    </a>
+    <div class="download">
+      <a class="link epub" target="_blank"
+         href="http://cdn.maintao.com/book/Security_for_Web_Developers.epub">ePub</a>
+      <a class="link pdf" target="_blank" href="http://cdn.maintao.com/book/Security_for_Web_Developers.pdf">PDF</a>
+    </div>
+  </div>
+  <div class="book">
+    <a class="cover" target="_blank" href="http://shop.oreilly.com/product/0636920032922.do">
+      <img src="https://covers.oreillystatic.com/images/0636920032922/cat.gif"/>
+    </a>
+    <div class="download">
+      <a class="link epub" target="_blank"
+         href="http://cdn.maintao.com/book/Developing_Web_Components.epub">ePub</a>
+      <a class="link pdf" target="_blank" href="http://cdn.maintao.com/book/Developing_Web_Components.pdf">PDF</a>
+    </div>
+  </div>
+  <div class="book">
+    <a class="cover" target="_blank" href="http://shop.oreilly.com/product/0636920032977.do">
+      <img src="https://covers.oreillystatic.com/images/0636920032977/cat.gif"/>
+    </a>
+    <div class="download">
+      <a class="link epub" target="_blank"
+         href="http://cdn.maintao.com/book/Web_Development_with_Node_and_Express.epub">ePub</a>
+      <a class="link pdf" target="_blank"
+         href="http://cdn.maintao.com/book/Web_Development_with_Node_and_Express.pdf">PDF</a>
+    </div>
+  </div>
+  <div class="book">
+    <a class="cover" target="_blank" href="http://shop.oreilly.com/product/0636920029564.do">
+      <img src="https://covers.oreillystatic.com/images/0636920029564/cat.gif"/>
+    </a>
+    <div class="download">
+      <a class="link epub" target="_blank" href="http://cdn.maintao.com/book/Speaking_JavaScript.epub">ePub</a>
+      <a class="link pdf" target="_blank" href="http://cdn.maintao.com/book/Speaking_JavaScript.pdf">PDF</a>
+    </div>
+  </div>
+  <div class="book">
+    <a class="cover" target="_blank" href="http://shop.oreilly.com/product/0636920030508.do">
+      <img src="https://covers.oreillystatic.com/images/0636920030508/cat.gif"/>
+    </a>
+    <div class="download">
+      <a class="link epub" target="_blank"
+         href="http://cdn.maintao.com/book/Learning_jQuery_Deferreds.epub">ePub</a>
+      <a class="link pdf" target="_blank" href="http://cdn.maintao.com/book/Learning_jQuery_Deferreds.pdf">PDF</a>
+    </div>
+  </div>
+  <div class="book">
+    <a class="cover" target="_blank" href="http://shop.oreilly.com/product/0636920029601.do">
+      <img src="https://covers.oreillystatic.com/images/0636920029601/cat.gif"/>
+    </a>
+    <div class="download">
+      <a class="link epub" target="_blank" href="http://cdn.maintao.com/book/RaphaelJS.epub">ePub</a>
+      <a class="link pdf" target="_blank" href="http://cdn.maintao.com/book/RaphaelJS.pdf">PDF</a>
+    </div>
+  </div>
+  <div class="book">
+    <a class="cover" target="_blank" href="http://shop.oreilly.com/product/0636920027621.do">
+      <img src="https://covers.oreillystatic.com/images/0636920027621/cat.gif"/>
+    </a>
+    <div class="download">
+      <a class="link epub" target="_blank" href="http://cdn.maintao.com/book/Values_Units_and_Colors.epub">ePub</a>
+      <a class="link pdf" target="_blank" href="http://cdn.maintao.com/book/Values_Units_and_Colors.pdf">PDF</a>
+    </div>
+  </div>
+  <div class="book">
+    <a class="cover" target="_blank" href="http://shop.oreilly.com/product/0636920028857.do">
+      <img src="https://covers.oreillystatic.com/images/0636920028857/cat.gif"/>
+    </a>
+    <div class="download">
+      <a class="link epub" target="_blank" href="http://cdn.maintao.com/book/Functional_JavaScript.epub">ePub</a>
+      <a class="link pdf" target="_blank" href="http://cdn.maintao.com/book/Functional_JavaScript.pdf">PDF</a>
+    </div>
+  </div>
+  <div class="book">
+    <a class="cover" target="_blank" href="http://shop.oreilly.com/product/0636920025955.do">
+      <img src="https://covers.oreillystatic.com/images/0636920025955/cat.gif"/>
+    </a>
+    <div class="download">
+      <a class="link epub" target="_blank"
+         href="http://cdn.maintao.com/book/Web_Performance_Daybook_Volume_2_.epub">ePub</a>
+      <a class="link pdf" target="_blank" href="http://cdn.maintao.com/book/Web_Performance_Daybook_Volume_2_.pdf">PDF</a>
+    </div>
+  </div>
+  <div class="book">
+    <a class="cover" target="_blank" href="http://shop.oreilly.com/product/0636920025344.do">
+      <img src="https://covers.oreillystatic.com/images/0636920025344/cat.gif"/>
+    </a>
+    <div class="download">
+      <a class="link epub" target="_blank"
+         href="http://cdn.maintao.com/book/Developing_Backbonedotjs_Applications.epub">ePub</a>
+      <a class="link pdf" target="_blank"
+         href="http://cdn.maintao.com/book/Developing_Backbonedotjs_Applications.pdf">PDF</a>
+    </div>
+  </div>
+  <div class="book">
+    <a class="cover" target="_blank" href="http://shop.oreilly.com/product/0636920027713.do">
+      <img src="https://covers.oreillystatic.com/images/0636920027713/cat.gif"/>
+    </a>
+    <div class="download">
+      <a class="link epub" target="_blank" href="http://cdn.maintao.com/book/JavaScript_Enlightenment.epub">ePub</a>
+      <a class="link pdf" target="_blank" href="http://cdn.maintao.com/book/JavaScript_Enlightenment.pdf">PDF</a>
+    </div>
+  </div>
+  <div class="book">
+    <a class="cover" target="_blank" href="http://shop.oreilly.com/product/0636920025832.do">
+      <img src="https://covers.oreillystatic.com/images/0636920025832/cat.gif"/>
+    </a>
+    <div class="download">
+      <a class="link epub" target="_blank"
+         href="http://cdn.maintao.com/book/Learning_JavaScript_Design_Patterns.epub">ePub</a>
+      <a class="link pdf" target="_blank"
+         href="http://cdn.maintao.com/book/Learning_JavaScript_Design_Patterns.pdf">PDF</a>
+    </div>
+  </div>
+  <div class="book">
+    <a class="cover" target="_blank" href="http://shop.oreilly.com/product/0636920024699.do">
+      <img src="https://covers.oreillystatic.com/images/0636920024699/cat.gif"/>
+    </a>
+    <div class="download">
+      <a class="link epub" target="_blank" href="http://cdn.maintao.com/book/Testable_JavaScript.epub">ePub</a>
+      <a class="link pdf" target="_blank" href="http://cdn.maintao.com/book/Testable_JavaScript.pdf">PDF</a>
+    </div>
+  </div>
+  <div class="book">
+    <a class="cover" target="_blank" href="http://shop.oreilly.com/product/0636920045595.do">
+      <img src="https://covers.oreillystatic.com/images/0636920045595/cat.gif"/>
+    </a>
+    <div class="download">
+      <a class="link epub" target="_blank"
+         href="http://cdn.maintao.com/book/Learning_Unix_for_OS_X_Second_Edition.epub">ePub</a>
+      <a class="link pdf" target="_blank"
+         href="http://cdn.maintao.com/book/Learning_Unix_for_OS_X_Second_Edition.pdf">PDF</a>
+    </div>
+  </div>
+  <div class="book">
+    <a class="cover" target="_blank" href="http://shop.oreilly.com/product/0636920045946.do">
+      <img src="https://covers.oreillystatic.com/images/0636920045946/cat.gif"/>
+    </a>
+    <div class="download">
+      <a class="link epub" target="_blank" href="http://cdn.maintao.com/book/Learning_Swift.epub">ePub</a>
+      <a class="link pdf" target="_blank" href="http://cdn.maintao.com/book/Learning_Swift.pdf">PDF</a>
+    </div>
+  </div>
+  <div class="book">
+    <a class="cover" target="_blank" href="http://shop.oreilly.com/product/0636920036142.do">
+      <img src="https://covers.oreillystatic.com/images/0636920036142/cat.gif"/>
+    </a>
+    <div class="download">
+      <a class="link epub" target="_blank" href="http://cdn.maintao.com/book/Docker_Up_and_Running.epub">ePub</a>
+      <a class="link pdf" target="_blank" href="http://cdn.maintao.com/book/Docker_Up_and_Running.pdf">PDF</a>
+    </div>
+  </div>
+  <div class="book">
+    <a class="cover" target="_blank" href="http://shop.oreilly.com/product/0636920032397.do">
+      <img src="https://covers.oreillystatic.com/images/0636920032397/cat.gif"/>
+    </a>
+    <div class="download">
+      <a class="link epub" target="_blank" href="http://cdn.maintao.com/book/Learning_Chef.epub">ePub</a>
+      <a class="link pdf" target="_blank" href="http://cdn.maintao.com/book/Learning_Chef.pdf">PDF</a>
+    </div>
+  </div>
+  <div class="book">
+    <a class="cover" target="_blank" href="http://shop.oreilly.com/product/0636920040385.do">
+      <img src="https://covers.oreillystatic.com/images/0636920040385/cat.gif"/>
+    </a>
+    <div class="download">
+      <a class="link epub" target="_blank" href="http://cdn.maintao.com/book/Programming_Rust.epub">ePub</a>
+      <a class="link pdf" target="_blank" href="http://cdn.maintao.com/book/Programming_Rust.pdf">PDF</a>
+    </div>
+  </div>
+  <div class="book">
+    <a class="cover" target="_blank" href="http://shop.oreilly.com/product/0636920027041.do">
+      <img src="https://covers.oreillystatic.com/images/0636920027041/cat.gif"/>
+    </a>
+    <div class="download">
+      <a class="link epub" target="_blank" href="http://cdn.maintao.com/book/MongoDB_Applied_Design_Patterns.epub">ePub</a>
+      <a class="link pdf" target="_blank"
+         href="http://cdn.maintao.com/book/MongoDB_Applied_Design_Patterns.pdf">PDF</a>
+    </div>
+  </div>
+  <div class="book">
+    <a class="cover" target="_blank" href="http://shop.oreilly.com/product/0636920028031.do">
+      <img src="https://covers.oreillystatic.com/images/0636920028031/cat.gif"/>
+    </a>
+    <div class="download">
+      <a class="link epub" target="_blank"
+         href="http://cdn.maintao.com/book/MongoDB_The_Definitive_Guide_Second_Edition.epub">ePub</a>
+      <a class="link pdf" target="_blank"
+         href="http://cdn.maintao.com/book/MongoDB_The_Definitive_Guide_Second_Edition.pdf">PDF</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<script>
+    var shine = new Shine(document.getElementById({{ .id }}));
+    shine.config.opacity = 0.21;
+    shine.config.opacityPow = 2.1;
+
+    var drawLightCenter = function() {
+        shine.light.position.x = window.innerWidth * 0.5;
+        shine.light.position.y = window.innerHeight * 0.5;
+        shine.draw();
+    };
+
+    var drawOnMouseMove = function(event) {
+        shine.light.position.x = event.clientX;
+        shine.light.position.y = event.clientY;
+        shine.draw();
+    };
+
+    var drawOnRotate = function (event) {
+        var radiusX = window.innerWidth * 0.5;
+        var radiusY = window.innerHeight * 0.5;
+
+        var beta = -Math.PI * event.beta / 180;
+        var gamma = -Math.PI * event.gamma / 180;
+
+        var x = 3.0 * radiusX * Math.sin(gamma);
+        var y = 3.0 * radiusY * Math.sin(beta);
+
+        shine.light.position.x = radiusX + x;
+        shine.light.position.y = radiusY + y;
+
+        shine.draw();
+    };
+    if ('onorientationchange' in window) {
+        window.addEventListener('deviceorientation', drawOnRotate, false);
+    }
+    else{
+        window.addEventListener('mousemove', drawOnMouseMove , false);
+        window.addEventListener('scroll', drawLightCenter , false);
+    }
+</script>

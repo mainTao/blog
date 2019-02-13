@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./smart.css">
+  <title>demo1</title>
+  <script src="../../js/jquery.js"></script>
+  <script src="../../js/prefixfree.js"></script>
+
+<body>
+<div style="text-align: center; margin-top: 20px">
+ 请将鼠标悬停于立方体的不同侧面
+</div>
+<!-- =container start= -->
+<div class="container">
+  <!-- =section block start= -->
+  <div class="section" style="text-align:center;">
+    <img class="xiaozhi" src="./xiaozhi.png" alt="">
+    <!-- =cube section start= -->
+    <div class="cube spin" style="margin:auto;">
+      <div data-value="EI" class="front face">E/I</div>
+      <div data-value="SN" class="right face">S/N</div>
+      <div data-value="TF" class="back face">T/F</div>
+      <div data-value="JP" class="left face">J/P</div>
+    </div><!-- =cube section end// -->
+  </div><!-- = section block end// -->
+</div><!-- =container end// -->
+
+<img class="EI desc" src="EI.png"/>
+<img class="SN desc" src="SN.png"/>
+<img class="TF desc" src="TF.png"/>
+<img class="JP desc" src="JP.png"/>
+</body>
+
+<script>
+  $('.desc').hide()
+
+  $('.cube')
+    .on('mouseover', function (e) {
+      let $this = $(this)
+      $this.addClass('paused')
+    })
+    .on('mouseleave', function () {
+      let $this = $(this)
+      $this.removeClass('paused')
+    })
+
+  $('.face')
+    .hover(function () {
+      let $this = $(this)
+      let value = $this.data('value')
+      $this.addClass('highlight')
+      $('.desc').hide()
+      $('.desc.' + value).fadeIn(400)
+    })
+    .on('mouseleave', function () {
+      let $this = $(this)
+      $this.removeClass('highlight')
+      $('.desc').fadeOut()
+    })
+
+
+</script>
+</html>

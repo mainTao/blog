@@ -1,0 +1,9 @@
+{
+  "srcDir": "/Users/chao/GitHub/blog/content/2018",
+  "dstDir": "",
+  "replace": [{
+      "from": "layout: tech",
+      "to": "layout: post\nstyle: code"
+    }
+  ]
+}

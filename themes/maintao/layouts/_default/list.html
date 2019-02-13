@@ -1,0 +1,25 @@
+{{ define "main" }}
+
+
+{{ if eq .Kind "section" }}
+<div class="banner">
+  <div id="year" class="shine-text">{{ .Section }}</div>
+</div>
+{{ end }}
+
+<div class="posts-wrapper">
+  <div class="posts">
+    {{ range .Pages }}
+    <div>
+      <span class="date">
+        {{ dateFormat "Jan 02" .Date }}
+      </span>
+      <a href="{{.URL}}">{{ .Title }}</a>
+    </div>
+    {{ end }}
+  </div>
+</div>
+
+{{ partial "shine-script.html" (dict "id" "year") }}
+
+{{ end }}

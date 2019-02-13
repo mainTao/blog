@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/prefixfree.js"></script>
+    <script src="../js/iframeResizer.contentWindow.js"></script>
+    <style>
+        body{
+            margin: 0;
+            padding-bottom: 5px;
+        }
+        button{
+            padding: 6px;
+            margin-left: 3px;
+            margin-top: 6px;
+            outline: none;
+        }
+        button.selected{
+            background: lightyellow;
+        }
+        .dice-6{
+            margin: auto;
+            margin-top: 90px;
+            margin-bottom: 80px;
+            width: 100px;
+            height: 100px;
+            transform-style: preserve-3d;
+            perspective: 400px;
+            transition: .6s ease-out;
+            perspective-origin: 50% 50%;
+        }
+
+        .point{
+            position: relative;
+            top: 50%;
+            left: 50%;
+            height: 4px;
+            width: 4px;
+            background: red;
+            border-radius: 2px;
+            transform: translateX(-2px) translateY(-2px) translateZ(55px);
+            transition: .6s ease-out;
+        }
+
+        .face{
+            position: absolute;
+            font-size: 32px;
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            line-height: 100px;
+            color: white;
+            transition: 1s;
+            opacity: 0.5;
+            /*backface-visibility: hidden;*/
+        }
+
+        .up {
+            background: rgba(102, 51,255,1);
+            transform: translateY(-50px) rotateX(90deg);
+        }
+        .bottom {
+            background: rgba(255,153, 0,1);
+            transform: rotateX(-90deg) translateZ(50px);
+        }
+        .right {
+            background: rgba(255, 0, 0,1);
+            transform: rotateY(90deg) translateZ(50px);
+        }
+        .left {
+            background: rgba( 51,255, 0,1);
+            transform: rotateY(-90deg) translateZ(50px);
+        }
+        .back {
+            background: rgba(255,50,160,1);
+            transform: translateZ(-50px);
+        }
+        .front {
+            background: rgba( 0,153,255,1);
+            transform: translateZ(50px);
+        }
+
+        .face.centralize{
+            top: 300px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="dice-6">
+    <div class="face up">1</div>
+    <div class="face right">2</div>
+    <div class="face back">3</div>
+    <div class="face front">4</div>
+    <div class="face left">5</div>
+    <div class="face bottom">6</div>
+    <div class="point"></div>
+</div>
+
+<div style="text-align: center">
+    <button class="change">0% 0%</button>
+    <button class="change selected">50% 50%</button>
+    <button class="change">0% 100%</button>
+    <button class="change">100% 100%</button>
+    <button class="change">-80% -80%</button>
+    <button class="change">170% 150%</button>
+</div>
+
+</body>
+
+<script>
+    $(function(){
+
+        var $dice = $('.dice-6');
+        var $faces = $(document).find('.face');
+
+        $(document).on('click', 'button.change', function(){
+            $dice.css('perspective-origin', $(this).text());
+            $('.point').css('left', $(this).text().split(' ')[0]);
+            $('.point').css('top', $(this).text().split(' ')[1]);
+            $('button.change').removeClass('selected');
+            $(this).addClass('selected');
+        });
+    });
+</script>
+</html>

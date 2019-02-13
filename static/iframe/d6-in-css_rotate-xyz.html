@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/prefixfree.js"></script>
+    <script src="../js/iframeResizer.contentWindow.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.css"/>
+    <style>
+        .wrap{
+            text-align: center;
+            perspective: 500px;
+        }
+        .axis{
+            background: rgba(255,0,0,0.5);
+            position: absolute;
+        }
+        .axis.x{
+            top: 50%;
+            left: 0;
+            height: 1px;
+            width: 100%;
+        }
+        .axis.y{
+            left: 50%;
+            width: 1px;
+            height: 100%;
+        }
+        .block{
+            margin-top: 70px;
+            margin-bottom: 70px;
+            display: inline-block;
+            width: 100%;
+            max-width: 150px;
+            height: 50px;
+            line-height: 50px;
+            background: rgba(255,0,0,0.4);
+        }
+        @keyframes rotate-x-pos {
+            from { transform: rotateX(0deg); }
+            to { transform: rotateX(360deg); }
+        }
+        @keyframes rotate-y-pos {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+        @keyframes rotate-z-pos {
+            from { transform: rotateZ(0deg); }
+            to { transform: rotateZ(360deg); }
+        }
+        @keyframes rotate-x-neg {
+            from { transform: rotateX(0deg); }
+            to { transform: rotateX(-360deg); }
+        }
+        @keyframes rotate-y-neg {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(-360deg); }
+        }
+        @keyframes rotate-z-neg {
+            from { transform: rotateZ(0deg); }
+            to { transform: rotateZ(-360deg); }
+        }
+        .block.rotate-x-pos{
+            animation: rotate-x-pos 2s linear 0s infinite;
+        }
+        .block.rotate-y-pos{
+            animation: rotate-y-pos 2s linear 0s infinite;
+        }
+        .block.rotate-z-pos{
+            animation: rotate-z-pos 2s linear 0s infinite;
+        }
+        .block.rotate-x-neg{
+            animation: rotate-x-neg 2s linear 0s infinite;
+        }
+        .block.rotate-y-neg{
+            animation: rotate-y-neg 2s linear 0s infinite;
+        }
+        .block.rotate-z-neg{
+            animation: rotate-z-neg 2s linear 0s infinite;
+        }
+
+        .action-bar{
+            margin-top: 20px;
+            text-align: center;
+        }
+        .action-bar button{
+            margin: 10px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="wrap col-xs-4">
+            <div class="axis x"></div>
+            <div class="block rotate-x">沿X轴</div>
+        </div>
+        <div class="wrap col-xs-4">
+            <div class="axis y"></div>
+            <div class="block rotate-y">沿Y轴</div>
+        </div>
+        <div class="wrap col-xs-4">
+            <div class="block rotate-z">沿Z轴</div>
+        </div>
+        <div style="clear:both"></div>
+        <div class="action-bar">
+            <button class="neg">负向旋转</button>
+            <button class="stop">停止</button>
+            <button class="pos">正向旋转</button>
+        </div>
+    </div>
+</div>
+</body>
+
+<script>
+    $(function(){
+        var $blocks = $(document).find('.block');
+        var $blockX = $blocks.filter('.rotate-x');
+        var $blockY = $blocks.filter('.rotate-y');
+        var $blockZ = $blocks.filter('.rotate-z');
+        $(document).on('click', '.pos', function(){
+            $blockX.removeClass('rotate-x-neg').addClass('rotate-x-pos');
+            $blockY.removeClass('rotate-y-neg').addClass('rotate-y-pos');
+            $blockZ.removeClass('rotate-z-neg').addClass('rotate-z-pos');
+        });
+        $(document).on('click', '.neg', function(){
+            $blockX.removeClass('rotate-x-pos').addClass('rotate-x-neg');
+            $blockY.removeClass('rotate-y-pos').addClass('rotate-y-neg');
+            $blockZ.removeClass('rotate-z-pos').addClass('rotate-z-neg');
+        });
+        $(document).on('click', '.stop', function(){
+            $blocks.removeClass('rotate-x-pos rotate-x-neg rotate-y-pos rotate-y-neg rotate-z-pos rotate-z-neg ');
+        });
+    });
+</script>
+</html>

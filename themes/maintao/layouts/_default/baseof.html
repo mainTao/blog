@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+{{- partial "head.html" . -}}
+
+<body>
+    <div id="content">
+        {{- block "main" . }}{{- end }}
+    </div>
+</body>
+
+{{ range split .Params.bodyjs " " }}
+{{ if ne (trim . " ") "" }}
+<script src="/js/{{ . }}.js"></script>
+{{ end }}
+{{ end }}
+
+</html>

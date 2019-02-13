@@ -1,0 +1,4 @@
+baseURL = "https://maintao.com/"
+languageCode = "zh-cn"
+title = "闷道"
+theme = "maintao"

@@ -1,0 +1,59 @@
+<head lang="zh-CN">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>页面不存在</title>
+  <link rel="stylesheet" href="/css/index.css"/>
+  <style type="text/css">
+      .container{
+          height: 100%;
+          width: 100%;
+      }
+      #text-404{
+          font-family: Helvetica, Arial, sans-serif;
+          color: #fcfcfc;
+          margin: auto;
+          text-align: center;
+          left: 0;
+          right: 0;
+          width: 100%;
+          font-size: 7em;
+          font-weight: 800;
+          letter-spacing: -0.02em;
+
+          position: relative;
+          top: 50%;
+          -webkit-transform: translateY(-50%);
+          -moz-transform: translateY(-50%);
+          transform: translateY(-50%);
+      }
+  </style>
+  <script src="/js/libs/shine.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+  <div id="text-404">四零四</div>
+</div>
+
+<script>
+  var shine = new Shine(document.getElementById('text-404'));
+  shine.config.opacity = 0.21;
+  shine.config.opacityPow = 2.1;
+
+  function update() {
+      window.requestAnimationFrame(update);
+      var time = new Date().getTime();
+      var speed = 0.00025;  // 1 = 1000 rotations/s
+      var phase = time * speed * 2.0 * Math.PI;
+      var radiusX = window.innerWidth * 0.5;
+      var radiusY = window.innerHeight * 0.5;
+      shine.light.position.x = radiusX + radiusX * Math.cos(phase);
+      shine.light.position.y = radiusY + radiusY * Math.sin(phase * 0.7);
+      shine.draw();
+  }
+
+  update();
+</script>
+
+</body>
