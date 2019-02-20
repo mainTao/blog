@@ -1,5 +1,5 @@
 ---
-title: 打造我自己的 Hugo 主题
+title: 打造自己的 Hugo 主题
 draft: true
 date: 2019-02-21
 layout: post
